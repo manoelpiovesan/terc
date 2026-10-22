@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>Simulador 3D — Rede corporativa</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">N</div>
+    <div class="brand-copy">
+      <p class="eyebrow">ENGENHARIA DE COMPUTAÇÃO · UERJ–IPRJ</p>
+      <h1>Rede corporativa <span>em 3D</span></h1>
+    </div>
+    <div class="topbar-meta"><span class="live-dot"></span> Modelo interativo</div>
+  </header>
+
+  <main class="app-shell">
+    <section class="workspace" aria-label="Visualização interativa da rede">
+      <div class="view-toolbar">
+        <div class="view-tabs" role="group" aria-label="Camadas da rede">
+          <button class="view-tab active" data-view="all">Visão geral</button>
+          <button class="view-tab" data-view="infra">Infraestrutura</button>
+          <button class="view-tab" data-view="segments">VLANs e sub-redes</button>
+          <button class="view-tab" data-view="routes">Rotas</button>
+        </div>
+        <button id="resetView" class="icon-button" title="Recentrar a visualização" aria-label="Recentrar a visualização">⟲</button>
+      </div>
+
+      <div id="scene-wrap" class="scene-wrap">
+        <div class="scene-hint"><span class="mouse-icon">✥</span> Arraste para girar <b>·</b> Role para aproximar <b>·</b> Clique em um equipamento</div>
+        <div id="scene-loading" class="scene-loading">Preparando a topologia 3D…</div>
+        <div id="scene-error" class="scene-error" hidden>Não foi possível carregar o Three.js. Verifique sua conexão com a Internet e recarregue a página.</div>
+        <button id="simulateButton" class="simulate-button"><span class="play-icon">▶</span> Simular tráfego Wi-Fi → Internet</button>
+        <div id="flowStatus" class="flow-status" aria-live="polite"></div>
+        <div class="axis-label axis-internet">BORDA / INTERNET</div>
+        <div class="axis-label axis-access">ACESSO / CLIENTES</div>
+      </div>
+
+      <div class="legend-bar" aria-label="Legenda de conexões">
+        <span><i class="legend-line ethernet"></i> Ethernet 1 Gb/s</span>
+        <span><i class="legend-line fiber"></i> Fibra 10 Gb/s</span>
+        <span><i class="legend-line poe"></i> PoE</span>
+        <span><i class="legend-line wifi"></i> Wi-Fi</span>
+        <span class="legend-tip">As setas indicam o sentido lógico da conexão.</span>
+      </div>
+    </section>
+
+    <aside class="inspector" aria-live="polite">
+      <div class="inspector-heading">
+        <div>
+          <p class="eyebrow" id="panelEyebrow">PAINEL DE INFORMAÇÕES</p>
+          <h2 id="panelTitle">Explore a rede</h2>
+        </div>
+        <div id="panelIcon" class="panel-icon">⌘</div>
+      </div>
+      <p id="panelIntro" class="panel-intro">Selecione um equipamento ou segmento no modelo 3D para ver sua função, endereçamento e conexões.</p>
+      <div id="panelContent" class="panel-content"></div>
+      <div class="panel-footnote"><span>i</span><p>O endereçamento segue as premissas adotadas no trabalho. Os APs estão em <code>10.0.10.0/24</code>; as redes <code>192.168.x.0/24</code> são destinadas aos clientes.</p></div>
+    </aside>
+  </main>
+
+  <footer class="page-footer">
+    <span>Trabalho Final de Tópicos Especiais em Redes de Computadores</span>
+    <span>Ana Clara · João Vitor · Manoel · João Marcello</span>
+  </footer>
+</body>
+</html>
